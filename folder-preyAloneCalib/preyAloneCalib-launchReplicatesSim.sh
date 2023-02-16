@@ -76,11 +76,11 @@ rep=3
 ## Non user defined variables ##
 
 # pry_surv_1= # argv[13] prey 1 resource units needed to pass survival trial. 
-# divide=$freq_surv*$pry_cons_1; by=3; pry_surv_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # echo "pry_surv_1 = $pry_surv_1" # by = a third of the max number of consecutive fasting days.
+divide=$freq_surv*$pry_cons_1; by=3; pry_surv_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # echo "pry_surv_1 = $pry_surv_1" # by = a third of the max number of consecutive fasting days.
 # pry_surv_2= # argv[14] prey 2 resource units needed to pass survival trial
-# divide=$freq_surv*$pry_cons_2; by=3; pry_surv_2=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # echo "pry_surv_2 = $pry_surv_2"
-# pry_repr_1=$(($pry_surv_1/1)); # argv[17] prey 1 resource units needed to pass reproduction trial. Defined as a proportion of what is needed to pass survival trial.
-# pry_repr_2=$(($pry_surv_2/1)); # argv[18] prey 2 resource units needed to pass reproduction trial
+divide=$freq_surv*$pry_cons_2; by=3; pry_surv_2=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # echo "pry_surv_2 = $pry_surv_2"
+pry_repr_1=$(($pry_surv_1/1)); # argv[17] prey 1 resource units needed to pass reproduction trial. Defined as a proportion of what is needed to pass survival trial.
+pry_repr_2=$(($pry_surv_2/1)); # argv[18] prey 2 resource units needed to pass reproduction trial
 
 divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # arg[24]
 # divide=$prd_cons_1*$freq_surv; by=3; prd_surv_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`; # arg[25]
@@ -97,13 +97,13 @@ make
 
 # sim values arrays
 pry2rpdArray=(5 10 15 20 25 30 50)
-pry2srvArray=(5 10 15 20 25 30 50)
+pry2cPrArray=(0.05 0.1 0.15 0.20 0.25 0.30 0.50)
 
 echo "pry2rpdArray is ${pry2rpdArray[*]}"
 echo "pry2rpdArray size is ${#pry2rpdArray[@]}"
 
-echo "pry2srvArray is ${pry2srvArray[*]}"
-echo "pry2srvArray size is ${#pry2srvArray[@]}"
+echo "pry2cPrArray is ${pry2cPrArray[*]}"
+echo "pry2cPrArray size is ${#pry2cPrArray[@]}"
 
 # loop over pry2resArray
 for ((n=0 ; n<${#pry2rpdArray[@]} ; n++))
@@ -111,9 +111,9 @@ do
     pry_repr_2=${pry2rpdArray[$n]}
 
     # loop over prdCatchProb
-    for ((i=0 ; i<${#pry2srvArray[@]} ; i++))
+    for ((i=0 ; i<${#pry2cPrArray[@]} ; i++))
     do
-        pry_surv_2=${pry2srvArray[$i]}
+        prd_ctch_pry2_1=${pry2cPrArray[$i]}
         # prd_ctch_pry2_1=$prd_ctch_pry1_1
 
         # # loop over predOffsArray
