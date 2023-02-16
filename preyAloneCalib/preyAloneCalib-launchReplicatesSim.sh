@@ -66,9 +66,9 @@ freq_rslt=10    # argv[39] frequency of landscape results shot
 freq_snap=1001  # argv[40] frequency of snap measure
 
 # management variables
-pry_cull_quot_2=0 # argv[41] prey 2 culling quota
-pry_cull_impl_2=0 # argv[42] prey 2 time of culling implementation
-pry_freq_cull_2=0 # argv[42] prey 2 culling intervention frequency
+pry_cull_quot_2=10 # argv[41] prey 2 culling quota
+pry_cull_impl_2=1001 # argv[42] prey 2 time of culling implementation
+pry_freq_cull_2=1001 # argv[42] prey 2 culling intervention frequency
 
 # number of replicates
 rep=3
