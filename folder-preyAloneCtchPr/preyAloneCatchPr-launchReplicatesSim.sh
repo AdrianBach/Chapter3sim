@@ -109,7 +109,7 @@ echo "pry2cPrArray size is ${#pry2cPrArray[@]}"
 for ((n=0 ; n<${#pry2srvArray[@]} ; n++))
 do 
     pry_surv_2=${pry2srvArray[$n]}
-    pry_repr_2=$pry_surv_1
+    pry_repr_2=$pry_surv_2
 
     # loop over prdCatchProb
     for ((i=0 ; i<${#pry2cPrArray[@]} ; i++))
