@@ -245,7 +245,7 @@ do
                 p=$(($p+1))
                 printf "pry_cull_quot_2=$pry_cull_quot_2 \t # argv[$p] prey 2 culling quota\n" >> paramFile.txt
                 p=$(($p+1))
-                printf "pry_time_impl_2=$pry_time_impl_2 \t # argv[$p] prey 2 start of culling policy\n" >> paramFile.txt
+                printf "pry_cull_impl_2=$pry_cull_impl_2 \t # argv[$p] prey 2 start of culling policy\n" >> paramFile.txt
                 p=$(($p+1))
                 printf "pry_freq_cull_2=$pry_freq_cull_2 \t # argv[$p] prey 2 culling intervention frequency\n\n" >> paramFile.txt
                 p=$(($p+1))
