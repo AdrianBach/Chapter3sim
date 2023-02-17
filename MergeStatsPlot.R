@@ -1,9 +1,9 @@
 Path = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/"
-folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-preyAloneCtchPr/"
+folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-introIIprey/"
 Keyword = "Results"
-Pattern = "newSA-p"
+Pattern = "introiiPrey-p"
 
-path = Path; keyword = Keyword; pattern = Pattern
+path = Path; keyword = Keyword; pattern = Pattern; 
 
 mergeResults(path = Path, keyword = Keyword, pattern = Pattern)
 
