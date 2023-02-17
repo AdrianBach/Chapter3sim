@@ -21,8 +21,8 @@
 # landscape variables
 size=25       # argv[2] world's side size
 res_nb=2     # argv[3] number of resource types
-max_res_1=100 # argv[4] max resource 1 per cell
-# max_res_2=100 # argv[5] max resource 2 per cell
+# max_res_1=100 # argv[4] max resource 1 per cell
+max_res_2=100 # argv[5] max resource 2 per cell
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
@@ -114,7 +114,7 @@ do
     # loop over prdCatchProb
     for ((i=0 ; i<${#pry1resArray[@]} ; i++))
     do
-        max_res_2=${pry1resArray[$i]}
+        max_res_1=${pry1resArray[$i]}
 
         # # loop over predOffsArray
         # for ((m=0 ; m<${#predOffsArray[@]} ; m++))
@@ -129,7 +129,7 @@ do
             #     divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`;
 
                 # name the simulation with only the variables of interest and their value
-                sim_name="introiiPrey-py1repr$pry_repr_2-resMax2$max_res_2" # argv[1]
+                sim_name="introiiPrey-py1repr$pry_repr_1-res1Max$max_res_1" # argv[1]
 
                 echo "sim $sim_name"
 
