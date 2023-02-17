@@ -21,7 +21,7 @@
 # landscape variables
 size=25       # argv[2] world's side size
 res_nb=2     # argv[3] number of resource types
-# max_res_1=100 # argv[4] max resource 1 per cell
+max_res_1=100 # argv[4] max resource 1 per cell
 max_res_2=100 # argv[5] max resource 2 per cell
 
 # prey variables
@@ -32,8 +32,8 @@ pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=5	# argv[11] prey 1 max consumption in resource units
 pry_cons_2=5	# argv[12] prey 2 max consumption in resource units
-pry_surv_1=15  # argv[13] prey 1 resource units needed to pass survival trial
-pry_surv_2=15  # argv[14] prey 2 resource units needed to pass survival trial
+pry_surv_1=20  # argv[13] prey 1 resource units needed to pass survival trial
+pry_surv_2=20  # argv[14] prey 2 resource units needed to pass survival trial
 pry_offs_1=2    # argv[15] prey 1 max number of offspring
 pry_offs_2=1    # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
@@ -96,8 +96,8 @@ make
 #### Simulation loop ####
 
 # sim values arrays
-pry1rpdArray=(15)
-pry1resArray=(100 110 120 130 140 150)
+pry1rpdArray=(10 15 20)
+pry1cPrArray=(0.1 0.15 0.20)
 
 echo "pry1rpdArray is ${pry1rpdArray[*]}"
 echo "pry1rpdArray size is ${#pry1rpdArray[@]}"
