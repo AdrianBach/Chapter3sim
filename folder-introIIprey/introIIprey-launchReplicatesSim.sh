@@ -38,7 +38,7 @@ pry_offs_1=2    # argv[15] prey 1 max number of offspring
 pry_offs_2=1    # argv[16] prey 2 max number of offspring
 # pry_repr_1=5  # argv[17] prey 1 resource units needed to pass reproduction trial
 pry_repr_2=$pry_surv_2  # argv[18] prey 2 resource units needed to pass reproduction trial
-pry_intro_1=1000   # argv[19]
+pry_intro_1=1001   # argv[19]
 pry_intro_2=0   # argv[20]
 
 # predator variables
@@ -96,7 +96,7 @@ make
 #### Simulation loop ####
 
 # sim values arrays
-pry1rpdArray=(5 10 15)
+pry1rpdArray=(15)
 pry1resArray=(100 110 120 130 140 150)
 
 echo "pry1rpdArray is ${pry1rpdArray[*]}"
