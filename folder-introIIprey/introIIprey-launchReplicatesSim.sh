@@ -48,7 +48,7 @@ prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_surv_1=300	# arg[25]
 prd_offs_1=0.5    # argv[26] predator 1 max number of offspring
 prd_intr_1=201   # argv[28] predator 1 time of introduction in the model
-prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
+# prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
 prd_ctch_pry2_1=0.1  # argv[30] predator 1 prey2 catch probability
 prd_cvrt_pry1_1=100  # argv[31] predator 1 prey1 resources/catch
 prd_cvrt_pry2_1=100  # argv[32] predator 1 prey1 resources/catch
@@ -102,8 +102,8 @@ pry1cPrArray=(0.1 0.15 0.20)
 echo "pry1rpdArray is ${pry1rpdArray[*]}"
 echo "pry1rpdArray size is ${#pry1rpdArray[@]}"
 
-echo "pry1resArray is ${pry1resArray[*]}"
-echo "pry1resArray size is ${#pry1resArray[@]}"
+echo "pry1cPrArray is ${pry1cPrArray[*]}"
+echo "pry1cPrArray size is ${#pry1cPrArray[@]}"
 
 # loop over pry2resArray
 for ((n=0 ; n<${#pry1rpdArray[@]} ; n++))
@@ -112,9 +112,9 @@ do
     # pry_repr_2=$pry_surv_2
 
     # loop over prdCatchProb
-    for ((i=0 ; i<${#pry1resArray[@]} ; i++))
+    for ((i=0 ; i<${#pry1cPrArray[@]} ; i++))
     do
-        max_res_1=${pry1resArray[$i]}
+        prd_ctch_pry1_1=${pry1cPrArray[$i]}
 
         # # loop over predOffsArray
         # for ((m=0 ; m<${#predOffsArray[@]} ; m++))
@@ -129,7 +129,7 @@ do
             #     divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`;
 
                 # name the simulation with only the variables of interest and their value
-                sim_name="introiiPrey-py1repr$pry_repr_1-res1Max$max_res_1" # argv[1]
+                sim_name="introiiPrey-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1" # argv[1]
 
                 echo "sim $sim_name"
 
