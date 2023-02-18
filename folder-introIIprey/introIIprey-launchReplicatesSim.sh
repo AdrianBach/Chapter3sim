@@ -21,22 +21,22 @@
 # landscape variables
 size=25       # argv[2] world's side size
 res_nb=2     # argv[3] number of resource types
-max_res_1=1000 # argv[4] max resource 1 per cell
-max_res_2=1000 # argv[5] max resource 2 per cell
+max_res_1=400 # argv[4] max resource 1 per cell
+max_res_2=400 # argv[5] max resource 2 per cell
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
-pry_init_1=100  # argv[7] prey 1 initial density in nb of individuals
+pry_init_1=0  # argv[7] prey 1 initial density in nb of individuals
 pry_init_2=100  # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=10	# argv[11] prey 1 max consumption in resource units
 pry_cons_2=10	# argv[12] prey 2 max consumption in resource units
-pry_surv_1=30  # argv[13] prey 1 resource units needed to pass survival trial
-pry_surv_2=30  # argv[14] prey 2 resource units needed to pass survival trial
+pry_surv_1=40  # argv[13] prey 1 resource units needed to pass survival trial
+pry_surv_2=40  # argv[14] prey 2 resource units needed to pass survival trial
 pry_offs_1=1    # argv[15] prey 1 max number of offspring
 pry_offs_2=1    # argv[16] prey 2 max number of offspring
-pry_repr_1=20  # argv[17] prey 1 resource units needed to pass reproduction trial
+pry_repr_1=30  # argv[17] prey 1 resource units needed to pass reproduction trial
 pry_repr_2=$pry_surv_2  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=1001   # argv[19]
 pry_intro_2=0   # argv[20]
@@ -46,25 +46,25 @@ prd_nb=1        # argv[21] number of predator types
 prd_init_1=100  # argv[22] predator 1 initial density in nb of individuals
 prd_move_1=0.1  # argv[23] predator 1 max movement range in fraction of size
 prd_cons_1=100   # argv[24] predator 1 satiation level in resource units
-prd_surv_1=300	# arg[25] predator 1 maintenance cost in resource units
+prd_surv_1=200	# arg[25] predator 1 maintenance cost in resource units
 prd_offs_1=0.5    # argv[26] predator 1 max number of offspring
-prd_repr_1=300 # argv[27] predator 1 resource units needed to pass reproduction trial. 
+prd_repr_1=450 # argv[27] predator 1 resource units needed to pass reproduction trial. 
 prd_intr_1=201   # argv[28] predator 1 time of introduction in the model
-prd_ctch_pry1_1=0.1  # argv[29] predator 1 prey1 catch probability
-prd_ctch_pry2_1=0.1  # argv[30] predator 1 prey2 catch probability
-prd_cvrt_pry1_1=100  # argv[31] predator 1 prey1 resources/catch
-prd_cvrt_pry2_1=100  # argv[32] predator 1 prey1 resources/catch
+prd_ctch_pry1_1=0.05  # argv[29] predator 1 prey1 catch probability
+prd_ctch_pry2_1=0.05  # argv[30] predator 1 prey2 catch probability
+prd_cvrt_pry1_1=110  # argv[31] predator 1 prey1 resources/catch
+prd_cvrt_pry2_1=110  # argv[32] predator 1 prey1 resources/catch
 prd_oprt_1=0    # argv[33] is predator oportunistic? (0 or 1)
 prd_spcf_1=0    # argv[34] is predator specific? (0 or 1)
 
 # time variables
-simu_time=3000    # argv[35] simulation time
+simu_time=1000    # argv[35] simulation time
 freq_repr=10   # argv[36] frequency of reproduction trials
 freq_surv=10   # argv[37] frequency of survival trials
 freq_rfll=10   # argv[38] frequency of landscape resources refill
 
 # frequency of assessment
-freq_rslt=10    # argv[39] frequency of landscape results shot
+freq_rslt=1    # argv[39] frequency of landscape results shot
 freq_snap=3001  # argv[40] frequency of snap measure
 
 # management variables
@@ -131,7 +131,7 @@ make
             #     divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`;
 
                 # name the simulation with only the variables of interest and their value
-                sim_name="introiiPrey-py1repr$pry_repr_1-py2repr$pry_repr_2" # argv[1]
+                sim_name="introiiPrey-res1max$max_res_1-py2repr$pry_repr_2-pryCvRt$prd_cvrt_pry1_1-prdCtPr$prd_ctch_pry1_1-prdRepr$prd_repr_1-prdSati$prd_cons_1-prdSurv$prd_surv_1" # argv[1]
 
                 echo "sim $sim_name"
 
