@@ -98,8 +98,8 @@ make
 #### Simulation loop ####
 
 # sim values arrays
-pry1rpdArray=(5 10 15 20 25 30 35)
-pry1cPrArray=(1 1.25 1.5 1.75 2)
+pry1rpdArray=(15 20 25 30 35)
+pry1cPrArray=(0.04 0.05 0.06 0.07 0.08)
 
 echo "pry1rpdArray is ${pry1rpdArray[*]}"
 echo "pry1rpdArray size is ${#pry1rpdArray[@]}"

@@ -2378,10 +2378,10 @@ int main(int argc, char **argv)
 
     /* file names */
     string resultsTableName = simulationName + "-ResultsTable.csv";
-    string snapshotTableName = simulationName + "-SnapshotTable.csv";
+    // string snapshotTableName = simulationName + "-SnapshotTable.csv";
 
     world.createResultsTable(resultsTableName);
-    world.createSnapshotTable(snapshotTableName);
+    // world.createSnapshotTable(snapshotTableName);
 
     /* ---- start simulation ---- */
 
@@ -2591,8 +2591,8 @@ int main(int argc, char **argv)
         if (timeStep % freqResu == 0)
             world.saveMeasures(resultsTableName, timeStep);
 
-        if (timeStep % freqSnap == 0)
-            world.snapshot(snapshotTableName, timeStep);
+        // if (timeStep % freqSnap == 0)
+        //     world.snapshot(snapshotTableName, timeStep);
 
         /* ---- check extinctions ---- */
         // if (prey1->currentPopulationSize == 0 | prey2->currentPopulationSize == 0 | pred1->currentPopulationSize == 0)
