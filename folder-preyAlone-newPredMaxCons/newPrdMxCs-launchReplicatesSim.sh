@@ -38,7 +38,7 @@ pry_offs_1=1    # argv[15] prey 1 max number of offspring
 pry_offs_2=1    # argv[16] prey 2 max number of offspring
 # pry_repr_1=30  # argv[17] prey 1 resource units needed to pass reproduction trial
 pry_repr_2=$pry_surv_2  # argv[18] prey 2 resource units needed to pass reproduction trial
-pry_intro_1=751   # argv[19]
+pry_intro_1=1001   # argv[19]
 pry_intro_2=0   # argv[20]
 
 # predator variables
@@ -283,7 +283,7 @@ do
                     printf "$j \t $rand_seed \t\t\t $time_s \t\t $time_h \n" >> paramFile.txt
                     
                     mv $sim_name-ResultsTable.csv rep$j-ResultsTable.csv
-                    mv $sim_name-SnapshotTable.csv rep$j-SnapshotTable.csv
+                    # mv $sim_name-SnapshotTable.csv rep$j-SnapshotTable.csv
                 done
 
                 # no need for the executable afterwards
