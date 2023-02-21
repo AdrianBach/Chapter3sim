@@ -40,10 +40,12 @@ boot_sd_ci <- function(x, confidence = 95, itr = 1000) {
   
 }
 
-Path = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/"
-folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-preyAlone-newPredMaxCons/"
+# Path = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/"
+# folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-preyAlone-newPredMaxCons/"
+Path = "/home/adrian/Documents/GitKraken/Chapter3sim/"
+folder = "/home/adrian/Documents/GitKraken/Chapter3sim/folder-cullBatch1/"
 Keyword = "Results"
-Pattern = "introiiPrey-p"
+Pattern = "cullBatch1-p"
 freqTrials = 10
 exclude.ext = FALSE
 
@@ -531,14 +533,14 @@ statsResultsNoExt <- function(path, keyword = c("Results", "Snapshot"), pattern,
             paste("cux")
             temp <- rbind(temp, sub)
           }
-        }
-      }  
-      
+        }  
       # if temp is still empty skip to the next j loop
       if (exclude.ext == TRUE & dim(temp)[1] == 0) {
-        print("extinctions only -- move to next sim folder")
+        print("extinctions only -- move to next sim folder")}  
         
-      } else {
+      }  
+        
+      # } else {
       
         if (exclude.ext == TRUE) {
           # otherwise replace stats by temp
@@ -747,7 +749,7 @@ statsResultsNoExt <- function(path, keyword = c("Results", "Snapshot"), pattern,
           ggsave(filename = paste("woExt-stats", keyword, "-catchRate-", simFol[j], ".pdf", sep = ""), path = paste(folder, "/allStatsAndPlots/", keyword, "Files-woExt", sep = ""), plot = fig, width = 6.22, height = 5.73, limitsize = TRUE)
         }
         
-      } # end of else loop
+      # } # end of else loop
       
     } # end loop over sim folders
     
