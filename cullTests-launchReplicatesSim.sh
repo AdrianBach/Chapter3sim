@@ -68,12 +68,12 @@ freq_rslt=1    # argv[39] frequency of landscape results shot
 freq_snap=3001  # argv[40] frequency of snap measure
 
 # management variables
-pry_cull_quot_1=0.05 # argv[41] prey 2 culling quota
+# pry_cull_quot_1=0.05 # argv[41] prey 2 culling quota
 pry_cull_impl_1=2001 # argv[42] prey 2 time of culling implementation
-pry_freq_cull_1=10 # argv[42] prey 2 culling intervention frequency
-prd_cull_quot_1=0 # argv[41] prey 2 culling quota
-prd_cull_impl_1=3001 # argv[42] prey 2 time of culling implementation
-prd_freq_cull_1=3001 # argv[42] prey 2 culling intervention frequency
+pry_freq_cull_1=10 # argv[43] prey 2 culling intervention frequency
+# prd_cull_quot_1=0 # argv[44] prey 2 culling quota
+prd_cull_impl_1=2001 # argv[45] prey 2 time of culling implementation
+prd_freq_cull_1=10 # argv[46] prey 2 culling intervention frequency
 
 # number of replicates
 rep=3
@@ -101,25 +101,25 @@ make
 #### Simulation loop ####
 
 # sim values arrays
-# pry1rpdArray=(15 20 25 30 35)
-# pry1cPrArray=(0.04 0.05 0.06 0.07 0.08)
+pry1qotArray=($(seq 0 0.25 1)) # (0 0.1 1)
+prd1qotArray=($(seq 0 0.25 1)) # (0 0.1 1)
 
-# echo "pry1rpdArray is ${pry1rpdArray[*]}"
-# echo "pry1rpdArray size is ${#pry1rpdArray[@]}"
+echo "pry1qotArray is ${pry1qotArray[*]}"
+echo "pry1qotArray size is ${#pry1qotArray[@]}"
 
-# echo "pry1cPrArray is ${pry1cPrArray[*]}"
-# echo "pry1cPrArray size is ${#pry1cPrArray[@]}"
+echo "prd1qotArray is ${prd1qotArray[*]}"
+echo "prd1qotArray size is ${#prd1qotArray[@]}"
 
-# # loop over pry2resArray
-# for ((n=0 ; n<${#pry1rpdArray[@]} ; n++))
-# do 
-#     pry_repr_1=${pry1rpdArray[$n]}
-# #     # pry_repr_2=$pry_surv_2
+# loop over pry2resArray
+for ((n=0 ; n<${#pry1qotArray[@]} ; n++))
+do 
+    pry_cull_quot_1=${pry1qotArray[$n]}
+#     # pry_repr_2=$pry_surv_2
 
-#     # loop over prdCatchProb
-#     for ((i=0 ; i<${#pry1cPrArray[@]} ; i++))
-#     do
-#         prd_ctch_pry1_1=${pry1cPrArray[$i]}
+    # loop over prdCatchProb
+    for ((i=0 ; i<${#prd1qotArray[@]} ; i++))
+    do
+        prd_cull_quot_1=${prd1qotArray[$i]}
 
         # # loop over predOffsArray
         # for ((m=0 ; m<${#predOffsArray[@]} ; m++))
@@ -134,7 +134,7 @@ make
             #     divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`;
 
                 # name the simulation with only the variables of interest and their value
-                sim_name="introiiPrey-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1-pry1clQt$pry_cull_quot_1" # argv[1]
+                sim_name="introiiPrey-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1-pry1clQt$pry_cull_quot_1-prdclQt$prd_cull_quot_1" # argv[1]
 
                 echo "sim $sim_name"
 
@@ -305,7 +305,7 @@ make
 
             # done
         # done
-    # done
-# done
+    done
+done
 
 echo "end of simulation loop."
