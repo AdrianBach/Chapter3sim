@@ -45,7 +45,7 @@ folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-cullBatch1/"
 # Path = "/home/adrian/Documents/GitKraken/Chapter3sim/"
 # folder = "/home/adrian/Documents/GitKraken/Chapter3sim/folder-cullBatch1/"
 Keyword = "Results"
-Pattern = "cullBatch1-p"
+Pattern = "introiiPrey-p"
 freqTrials = 10
 exclude.ext = FALSE
 
@@ -536,13 +536,13 @@ statsResultsNoExt <- function(path, keyword = c("Results", "Snapshot"), pattern,
           }
         }  
       }  
-        
+      
       # if temp is still empty skip to the next j loop
       if (exclude.ext == TRUE & dim(temp)[1] == 0) {
         print("extinctions only -- move to next sim folder") # }  
         
       } else {
-      
+        
         if (exclude.ext == TRUE) {
           # otherwise replace stats by temp
           stats <- temp
@@ -1112,6 +1112,7 @@ cullResultsNoExt <- function(path, keyword = c("Results", "Snapshot"), pattern) 
 #### Extinction frequency contour figures ####
 
 library(plotly)
+library(viridis)
 
 # build results matrix
 
@@ -1121,145 +1122,145 @@ d <- read.csv(paste(tabFol, "stats-folder-cullBatch1.csv", sep = "/"))
 
 # using plotly
 {xVar <- levels(as.factor(d$prey1cullQuota))
-yVar <- levels(as.factor(d$predcullQuota))
-
-resmat <- matrix(data = d$prey2extFreq, ncol = length(yVar), nrow = length(xVar))
-
-fig <- plot_ly(
-  x = xVar, 
-  y = yVar, 
-  # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
-  z = t(resmat),
-  type = "heatmap",
-  colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
-  # autocontour = F,
-  # contours = list(showlabels = TRUE),
-  # contours = list(
-  #   start = 0,
-  #   end = 1,
-  #   size = 0.1,
-  #   showlabels = T
-  # )
-)
-
-xlab <- list(
-  title = "prey I removal quota"#,
-  # titlefont = f
-)
-ylab <- list(
-  title = "predator removal quota"#,
-  # titlefont = f
-)
-
-fig <- fig %>% colorbar(title = "Prey II\nextinction\nfrequency")
-fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
-
-fig# prey 1 extinction
-
-resmat <- matrix(data = d$prey1extFreq, ncol = length(yVar), nrow = length(xVar))
-
-fig <- plot_ly(
-  x = xVar, 
-  y = yVar, 
-  # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
-  z = t(resmat),
-  type = "contour",
-  colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
-  autocontour = F,
-  contours = list(showlabels = TRUE),
-  contours = list(
-    start = 0,
-    end = 1,
-    size = 0.1,
-    showlabels = T
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$prey2extFreq, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = t(resmat),
+    type = "heatmap",
+    colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    # autocontour = F,
+    # contours = list(showlabels = TRUE),
+    # contours = list(
+    #   start = 0,
+    #   end = 1,
+    #   size = 0.1,
+    #   showlabels = T
+    # )
   )
-)
-
-xlab <- list(
-  title = "prey I removal quota"#,
-  # titlefont = f
-)
-ylab <- list(
-  title = "predator removal quota"#,
-  # titlefont = f
-)
-
-fig <- fig %>% colorbar(title = "Prey I\nextinction\nfrequency")
-fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
-
-fig
-
-# predator extinction
-resmat <- matrix(data = d$pred1extFreq, ncol = length(yVar), nrow = length(xVar))
-
-fig <- plot_ly(
-  x = xVar, 
-  y = yVar, 
-  # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
-  z = t(resmat),
-  type = "contour",
-  colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
-  autocontour = F,
-  contours = list(showlabels = TRUE),
-  contours = list(
-    start = 0,
-    end = 1,
-    size = 0.1,
-    showlabels = T
+  
+  xlab <- list(
+    title = "prey I removal quota"#,
+    # titlefont = f
   )
-)
-
-xlab <- list(
-  title = "prey I removal quota"#,
-  # titlefont = f
-)
-ylab <- list(
-  title = "predator removal quota"#,
-  # titlefont = f
-)
-
-fig <- fig %>% colorbar(title = "Predator\nextinction\nfrequency")
-fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
-
-fig}
+  ylab <- list(
+    title = "predator removal quota"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey II\nextinction\nfrequency")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
+  
+  resmat <- matrix(data = d$prey1extFreq, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = t(resmat),
+    type = "contour",
+    colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal quota"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal quota"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey I\nextinction\nfrequency")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig
+  
+  # predator extinction
+  resmat <- matrix(data = d$pred1extFreq, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = t(resmat),
+    type = "contour",
+    colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal quota"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal quota"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Predator\nextinction\nfrequency")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig}
 
 # using ggplot
 
 savePath = "C:/Users/adb3/OneDrive - University of Stirling/Chapter 3/figures/"
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
-        geom_tile(aes(fill = prey2extFreq))+
-        geom_text(aes(label = prey2extFreq), col = "cyan", size = 2.5) + 
-        scale_fill_viridis_c("Prey 2\nextinction\nfrequency", option = 'plasma') + # , direction = -1
-        labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
+  geom_tile(aes(fill = prey2extFreq))+
+  # geom_text(aes(label = prey2extFreq), col = "cyan", size = 2.5) + 
+  scale_fill_viridis_c("Prey 2\nextinction\nfrequency", option = 'plasma') + # , direction = -1
+  labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
 ggp                  
 
-ggsave(filename = "prey2extFreqHeatmap.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
+ggsave(filename = "prey2extFreqHeatmap-noText.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
   geom_tile(aes(fill = prey1extFreq))+
-  geom_text(aes(label = prey1extFreq), col = "cyan", size = 2.5) + 
+  # geom_text(aes(label = prey1extFreq), col = "cyan", size = 2.5) + 
   scale_fill_viridis_c("Prey 1\nextinction\nfrequency", option = 'plasma') + # , direction = -1
   labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
 ggp                  
 
-ggsave(filename = "prey1extFreqHeatmap.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
+ggsave(filename = "prey1extFreqHeatmap-noText.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
   geom_tile(aes(fill = pred1extFreq))+
-  geom_text(aes(label = pred1extFreq), col = "cyan", size = 2.5) + 
+  # geom_text(aes(label = pred1extFreq), col = "cyan", size = 2.5) + 
   scale_fill_viridis_c("Predator\nextinction\nfrequency", option = 'plasma') + # , direction = -1
   labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
 ggp                  
 
-ggsave(filename = "pred1extFreqHeatmap.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
+ggsave(filename = "pred1extFreqHeatmap-noText.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
 
 #### 3D plot for final density #### 
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
   geom_tile(aes(fill = prey2densAfterMean))+
   # geom_text(aes(label = round(prey2densAfterMean, 2)), col = "white", size = 2.5) +
-  scale_fill_viridis_c("Prey 2\nfinal\ndensity", option = 'plasma') + # , direction = -1
+  scale_fill_viridis_c("Prey 2\nfinal\ndensity") + # , option = 'plasma', direction = -1
   labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
 ggp                  
 
@@ -1284,40 +1285,40 @@ ggp
 ggsave(filename = "prey1finalDensHeatmap.png", plot = ggp, device = "png", scale = 4, path = savePath, limitsize = F)
 
 {xVar <- levels(as.factor(d$prey1cullQuota))
-yVar <- levels(as.factor(d$predcullQuota))
-
-resmat <- matrix(data = d$prey2densAfterMean, ncol = length(yVar), nrow = length(xVar))
-
-fig <- plot_ly(
-  x = xVar, 
-  y = yVar, 
-  # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
-  z = t(resmat),
-  type = "contour",
-  # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
-  autocontour = F,
-  contours = list(showlabels = TRUE),
-  contours = list(
-    start = 0,
-    end = 1,
-    size = 0.1,
-    showlabels = T
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$prey2densAfterMean, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = t(resmat),
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
   )
-)
-
-xlab <- list(
-  title = "prey I removal quota"#,
-  # titlefont = f
-)
-ylab <- list(
-  title = "predator removal quota"#,
-  # titlefont = f
-)
-
-fig <- fig %>% colorbar(title = "Prey II\nfinal\ndensity")
-fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
-
-fig# prey 1 extinction
+  
+  xlab <- list(
+    title = "prey I removal quota"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal quota"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey II\nfinal\ndensity")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
 }
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
@@ -1346,6 +1347,7 @@ resmat <- matrix(data = d$prey2densAfterMean, ncol = length(yVar), nrow = length
 
 fig <- plot_ly(
   type = 'surface',
+  colors = viridis_pal(option = "C")(3),
   contours = list(
     x = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white'),
     y = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white')),
@@ -1353,11 +1355,11 @@ fig <- plot_ly(
   y = yVar,
   z = resmat)
 fig <- fig %>% layout( scene = list(
-    xaxis = list(title = "Prey 1 removal"),
-    yaxis = list(title = "Predator removal"),
-    zaxis = list(title = "Prey 2 density"))) # ,
-    # camera = list(eye = list(x = 0, y = -1, z = 0.5)) # ,
-    # aspectratio = list(x = .9, y = .8, z = 0.2)
+  xaxis = list(title = "Prey 1 removal"),
+  yaxis = list(title = "Predator removal"),
+  zaxis = list(title = "Prey 2 density"))) # ,
+# camera = list(eye = list(x = 0, y = -1, z = 0.5)) # ,
+# aspectratio = list(x = .9, y = .8, z = 0.2)
 fig <- fig %>% colorbar(title = "Prey II\nfinal\ndensity")
 fig
 
@@ -1402,7 +1404,7 @@ fig
 #### oscillation amplitude ####
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
-  geom_tile(aes(fill = prey2densAfterMax - prey2densAfterMin))+
+  geom_tile(aes(fill = (prey2densAfterMax - prey2densAfterMin)/prey2densAfterMean))+
   # geom_text(aes(label = round(prey2densAfterMean, 2)), col = "white", size = 2.5) +
   scale_fill_viridis_c("Prey 2\ndensity\namplitude", option = 'plasma') + # , direction = -1
   labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
@@ -1756,3 +1758,148 @@ fig <- fig %>% layout( scene = list(
 # aspectratio = list(x = .9, y = .8, z = 0.2)
 fig <- fig %>% colorbar(title = "Predator\ndensity")
 fig
+#### numerical and functional response ####
+
+filePath <- paste(Path, "folder-preyAlone-newPredMaxCons", "/allStatsAndPlots", "/ResultsFiles-woExt", sep = "")
+df <- read.csv(filePath)
+
+# plot and save density figure
+data <- df[100:200,]
+
+# x = data$timeStep/10
+x1 = data$prey1PopulationSizeMean
+x2 = data$prey2PopulationSizeMean
+y3 = data$predatorGrowthRateMean
+# y1min = data$prey1PopulationSizeICinf
+# y2min = data$prey2PopulationSizeICinf
+# y3min = data$predator1PopulationSizeICinf
+# y1max = data$prey1PopulationSizeICsup
+# y2max = data$prey2PopulationSizeICsup
+# y3max = data$predator1PopulationSizeICsup
+y1c = "red"
+y2c = "blue"
+# y3c = "orange"
+# tIntro = 210
+
+fig <- ggplot(data) + 
+  # geom_rect(aes(xmin = 0, xmax = tIntro, ymin = 0, ymax = 1.05*max(c(max(y1max), max(y2max), max(y3max)))), alpha=0.5, fill = "lightgrey") +
+  # geom_ribbon(aes(ymin = y1min, ymax = y1max), alpha = 0.2, size = 0.1, col = y1c, fill = y1c) +
+  # geom_ribbon(aes(ymin = y2min, ymax = y2max), alpha = 0.2, size = 0.1, col = y2c, fill = y2c) +
+  # geom_ribbon(aes(ymin = y3min, ymax = y3max), alpha = 0.2, size = 0.1, col = y3c, fill = y3c) +
+  geom_line(aes(x = x1, y = y3), color = y1c) +
+  geom_line(aes(x = x2, y = y3), color = y2c) +
+  # geom_line(aes(y = y3), color = y3c) +
+  # geom_point(aes(y = y1), size = 2.5, shape = 21, fill = "white", color = y1c) +
+  # geom_point(aes(y = y2), size = 2.5, shape = 22, fill = "white", color = y2c) +
+  # geom_point(aes(y = y3), size = 2.5, shape = 24, fill = "white", color = y3c) +
+  labs(x = "Prey density", y = "Predator growth rate") +
+  scale_colour_manual(name='Populations',
+                      breaks=c('Prey 1', 'Prey 2'),
+                      values=c(y1c, y2c))
+
+#### add time of introduction ####
+
+data <- read.csv(file = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-cullBatch1/cullBatch1-py1repr25-py1ctPr0.04-pry1clQt0.10-prdclQt0.20/stats/statsResults-cullBatch1-py1repr25-py1ctPr0.04-pry1clQt0.10-prdclQt0.20.csv")
+
+x = data$timeStep/10
+y1 = data$prey1PopulationSizeMean
+y2 = data$prey2PopulationSizeMean
+y3 = data$predator1PopulationSizeMean
+y1min = data$prey1PopulationSizeICinf
+y2min = data$prey2PopulationSizeICinf
+y3min = data$predator1PopulationSizeICinf
+y1max = data$prey1PopulationSizeICsup
+y2max = data$prey2PopulationSizeICsup
+y3max = data$predator1PopulationSizeICsup
+y1c = "red"
+y2c = "blue"
+y3c = "orange"
+tIntro1 = 20
+tIntro2 = 30
+tImple = 100
+
+fig <- ggplot(data, aes(x)) + 
+  # geom_rect(aes(xmin = 0, xmax = tIntro, ymin = 0, ymax = 1.05*max(c(max(y1max), max(y2max), max(y3max)))), alpha=0.5, fill = "lightgrey") +
+  # geom_vline(xintercept = tIntro1, linetype = "dotted") +
+  geom_vline(xintercept = tIntro2, linetype = "dotdash") +
+  geom_vline(xintercept = tImple, linetype = "dashed") +
+  geom_ribbon(aes(ymin = y1min, ymax = y1max), alpha = 0.2, size = 0.1, col = y1c, fill = y1c) +
+  geom_ribbon(aes(ymin = y2min, ymax = y2max), alpha = 0.2, size = 0.1, col = y2c, fill = y2c) +
+  geom_ribbon(aes(ymin = y3min, ymax = y3max), alpha = 0.2, size = 0.1, col = y3c, fill = y3c) +
+  geom_line(aes(y = y1), color = y1c) +
+  geom_line(aes(y = y2), color = y2c) +
+  geom_line(aes(y = y3), color = y3c) +
+  # geom_point(aes(y = y1), size = 2.5, shape = 21, fill = "white", color = y1c) +
+  # geom_point(aes(y = y2), size = 2.5, shape = 22, fill = "white", color = y2c) +
+  # geom_point(aes(y = y3), size = 2.5, shape = 24, fill = "white", color = y3c) +
+  labs(x = "Generations", y = "Population density") +
+  scale_colour_manual(name='Populations',
+                      breaks=c('Prey 1', 'Prey 2', 'Predator'),
+                      values=c(y1c, y2c, y3c))
+
+if (exclude.ext == FALSE) {
+  
+  # save plot in this folder
+  ggsave(filename = paste("stats", keyword, "-density-", simFol[j], ".pdf", sep = ""), path = statsFol, plot = fig, width = 6.22, height = 5.73, limitsize = TRUE)
+  
+  # and copy in the global stats folder
+  file.copy(from = paste(statsFol, "/stats", keyword, "-density-", simFol[j], ".pdf", sep = ""), to = paste(folder, "/allStatsAndPlots/", keyword, "Files", sep = ""))
+} else {
+  
+  # save plot in global folder
+  ggsave(filename = paste("woExt-stats", keyword, "-density-", simFol[j], ".pdf", sep = ""), path = paste(folder, "/allStatsAndPlots/", keyword, "Files-woExt", sep = ""), plot = fig, width = 6.22, height = 5.73, limitsize = TRUE)
+}
+
+vec = c(348.0333333,
+        343.8,
+        336.6666667,
+        332.0666667,
+        325.5666667,
+        318.8,
+        309.9,
+        302.4,
+        294.9666667,
+        288.9,
+        284.2666667,
+        284.7333333,
+        282.2333333,
+        278.8666667,
+        279.5333333,
+        282.8666667,
+        284.5,
+        292.7,
+        296.8333333,
+        303.9,
+        308.0666667,
+        313.4,
+        316.9666667,
+        318.7,
+        318.6333333,
+        315.8333333,
+        315.6666667,
+        313.8666667,
+        314.0666667,
+        313.4,
+        311.3,
+        308.3,
+        306.9,
+        304.2,
+        299.4333333,
+        297.7,
+        298.5,
+        296.6,
+        298.3666667,
+        300.6666667,
+        302.7666667,
+        304.6,
+        305.6333333,
+        309.2666667,
+        311.1,
+        312.0666667,
+        314.4,
+        311.5333333,
+        308.3,
+        311.9333333,
+        311.7666667)
+mean(vec)
+boot_sd_ci(vec)
