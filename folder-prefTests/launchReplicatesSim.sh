@@ -26,8 +26,8 @@ max_res_2=400 # argv[5] max resource 2 per cell
 
 # prey variables
 pry_nb=2        # argv[6] number of prey types
-pry_init_1=4000  # argv[7] prey 1 initial density in nb of individuals
-pry_init_2=100  # argv[8] prey 2 initial density
+pry_init_1=1000  # argv[7] prey 1 initial density in nb of individuals
+pry_init_2=1000  # argv[8] prey 2 initial density
 pry_move_1=0.1  # argv[9] prey 1 max movement range in fraction of size
 pry_move_2=0.1  # argv[10] prey 2 movement range
 pry_cons_1=10	# argv[11] prey 1 max consumption in resource units
@@ -39,7 +39,7 @@ pry_offs_2=1    # argv[16] prey 2 max number of offspring
 pry_repr_1=25  # argv[17] prey 1 resource units needed to pass reproduction trial
 pry_repr_2=$pry_surv_2  # argv[18] prey 2 resource units needed to pass reproduction trial
 pry_intro_1=0   # argv[19]
-pry_intro_2=30   # argv[20]
+pry_intro_2=0   # argv[20]
 
 # predator variables
 prd_nb=1        # argv[21] number of predator types
@@ -134,7 +134,8 @@ make
             #     divide=$((3*$prd_surv_1)); by=$freq_surv; prd_cons_1=`echo "scale=0; ($divide+$by-1)/$by" | bc`;
 
                 # name the simulation with only the variables of interest and their value
-                sim_name="cullNrw-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1-pry1clQt$pry_cull_quot_1-prdclQt$prd_cull_quot_1" # argv[1]
+                # sim_name="cullNrw-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1-pry1clQt$pry_cull_quot_1-prdclQt$prd_cull_quot_1" # argv[1]
+                sim_name="prefPy2-py1repr$pry_repr_1-py1ctPr$prd_ctch_pry1_1-test" # argv[1]
 
                 echo "sim $sim_name"
 
