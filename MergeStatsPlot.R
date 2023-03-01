@@ -1224,7 +1224,7 @@ d <- read.csv(paste(tabFol, "stats-folder-cullBatch1.csv", sep = "/"))
   
   fig}
 
-# using ggplot
+# using ggplot heatmap
 
 savePath = "C:/Users/adb3/OneDrive - University of Stirling/Chapter 3/figures/"
 
@@ -1293,9 +1293,10 @@ ggsave(filename = "prey1finalDensHeatmap.png", plot = ggp, device = "png", scale
     x = xVar, 
     y = yVar, 
     # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
-    z = t(resmat),
+    z = resmat,
     type = "contour",
     # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
     autocontour = F,
     contours = list(showlabels = TRUE),
     contours = list(
@@ -1307,22 +1308,98 @@ ggsave(filename = "prey1finalDensHeatmap.png", plot = ggp, device = "png", scale
   )
   
   xlab <- list(
-    title = "prey I removal quota"#,
+    title = "prey I removal rate"#,
     # titlefont = f
   )
   ylab <- list(
-    title = "predator removal quota"#,
+    title = "predator removal rate"#,
     # titlefont = f
   )
   
   fig <- fig %>% colorbar(title = "Prey II\nfinal\ndensity")
   fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
   
+  fig
+}
+
+{xVar <- levels(as.factor(d$prey1cullQuota))
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$prey1densAfterMean, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = resmat, # t(resmat),
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal rate"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal rate"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey I\nfinal\ndensity")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
+}
+
+{xVar <- levels(as.factor(d$prey1cullQuota))
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$predatorDensMean, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = resmat, # t(resmat),
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal rate"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal rate"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Predator\nfinal\ndensity")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
   fig# prey 1 extinction
 }
 
 ggp <- ggplot(d, aes(prey1cullQuota, predcullQuota)) +
-  geom_tile(aes(fill = prey1densAfterMean))+
+  geom_contour(aes(fill = stat(prey1densAfterMean)), geom="polygon")+
   # geom_text(aes(label = round(prey2densAfterMean, 2)), col = "white", size = 2.5) +
   scale_fill_viridis_c("Prey 1\nfinal\ndensity", option = 'plasma') + # , direction = -1
   labs(x = "Prey 1 removal quota", y = "Predator removal quota") 
@@ -1348,9 +1425,11 @@ resmat <- matrix(data = d$prey2densAfterMean, ncol = length(yVar), nrow = length
 fig <- plot_ly(
   type = 'surface',
   colors = viridis_pal(option = "C")(3),
+  # contours = list(
+  #   x = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white'),
+  #   y = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white')),
   contours = list(
-    x = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white'),
-    y = list(show = TRUE, start = 0, end = 0.25, size = 0.05, color = 'white')),
+    z = list(show = TRUE, start = 0, end = 6000, size = 1000, color = 'white')),
   x = xVar,
   y = yVar,
   z = resmat)
@@ -1462,6 +1541,120 @@ ggsave(filename = "pred1densAmplHeatmap.png", plot = ggp, device = "png", scale 
   )
   
   fig <- fig %>% colorbar(title = "Prey II\nfinal\ndensity")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
+}
+
+{xVar <- levels(as.factor(d$prey1cullQuota))
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$prey2densAfterMax-d$prey2densAfterMin, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = resmat,
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal rate"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal rate"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey II\ndensity\namplitude")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
+}
+
+{xVar <- levels(as.factor(d$prey1cullQuota))
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$prey1densAfterMax - d$prey1densAfterMin, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = resmat, # t(resmat),
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal rate"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal rate"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Prey I\ndensity\namplitude")
+  fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
+  
+  fig# prey 1 extinction
+}
+
+{xVar <- levels(as.factor(d$prey1cullQuota))
+  yVar <- levels(as.factor(d$predcullQuota))
+  
+  resmat <- matrix(data = d$predatorDensMax - d$predatorDensMin, ncol = length(yVar), nrow = length(xVar))
+  
+  fig <- plot_ly(
+    x = xVar, 
+    y = yVar, 
+    # z = matrix(data = d$ext_prob, ncol = length(bubo), nrow = length(bura)), 
+    z = resmat, # t(resmat),
+    type = "contour",
+    # colorscale = list(c(0, 0.5, 1), c('green', 'orange', 'red')),
+    colors = viridis_pal(option = "C")(3),
+    autocontour = F,
+    contours = list(showlabels = TRUE),
+    contours = list(
+      start = 0,
+      end = 1,
+      size = 0.1,
+      showlabels = T
+    )
+  )
+  
+  xlab <- list(
+    title = "prey I removal rate"#,
+    # titlefont = f
+  )
+  ylab <- list(
+    title = "predator removal rate"#,
+    # titlefont = f
+  )
+  
+  fig <- fig %>% colorbar(title = "Predator\ndensity\namplitude")
   fig <- fig %>% layout(xaxis = xlab, yaxis = ylab)
   
   fig# prey 1 extinction
@@ -1758,6 +1951,7 @@ fig <- fig %>% layout( scene = list(
 # aspectratio = list(x = .9, y = .8, z = 0.2)
 fig <- fig %>% colorbar(title = "Predator\ndensity")
 fig
+
 #### numerical and functional response ####
 
 filePath <- paste(Path, "folder-preyAlone-newPredMaxCons", "/allStatsAndPlots", "/ResultsFiles-woExt", sep = "")
