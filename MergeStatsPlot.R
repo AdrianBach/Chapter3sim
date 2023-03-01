@@ -40,12 +40,12 @@ boot_sd_ci <- function(x, confidence = 95, itr = 1000) {
   
 }
 
-Path = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/"
-folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-cullBatch1/"
-# Path = "/home/adrian/Documents/GitKraken/Chapter3sim/"
-# folder = "/home/adrian/Documents/GitKraken/Chapter3sim/folder-cullBatch1/"
+# Path = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/"
+# folder = "C:/Users/adb3/Desktop/PhD/GitKraken/Chapter3sim/folder-cullBatch1/"
+Path = "/home/adrian/Documents/GitKraken/Chapter3sim/"
+folder = "/home/adrian/Documents/GitKraken/Chapter3sim/folder-pref2-cullBatch2/"
 Keyword = "Results"
-Pattern = "introiiPrey-p"
+Pattern = "cullBatch2-p"
 freqTrials = 10
 exclude.ext = FALSE
 
@@ -78,7 +78,7 @@ mergeResults <- function(path, keyword = c("Results", "Snapshot"), pattern) {
     simFol <- grep(pattern = c(pattern), x = simFol, value = T)
     
     # loop over the sim folders
-    for (j in 1:length(simFol)) {
+    for (j in 2:length(simFol)) {
       
       # get results folder
       # resFol <- paste(folder, simFol[j], sep = "/")
@@ -536,11 +536,11 @@ statsResultsNoExt <- function(path, keyword = c("Results", "Snapshot"), pattern,
           }
         }  
       }  
-      
+       
+        
       # if temp is still empty skip to the next j loop
       if (exclude.ext == TRUE & dim(temp)[1] == 0) {
-        print("extinctions only -- move to next sim folder") # }  
-        
+        print("extinctions only -- move to next sim folder") # } 
       } else {
         
         if (exclude.ext == TRUE) {
